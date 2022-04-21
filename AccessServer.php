@@ -1,4 +1,5 @@
 <?php
+
 function getAllRecipes()
 {
     $servername = "localhost";
@@ -17,8 +18,34 @@ function getAllRecipes()
     return $conn->query($sql)->fetch_all();
 }
 
+//function that add recipe to the database
+function addRecipe($nomRecette, $descriptionRecette)
+{
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "soap-kitchen";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO recipe (nomRecette, descriptionRecette)
+    VALUES ('$nomRecette', '$descriptionRecette')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
 ini_set('soap.wsdl_cache_enabled', 0);
 $serversoap = new SoapServer("http://localhost/tp-serveur-php-soap/server.wsdl");
 $serversoap->addFunction("getAllRecipes");
+$serversoap->addFunction("addRecipe");
 $serversoap->handle();
 ?>
