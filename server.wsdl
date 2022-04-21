@@ -10,6 +10,12 @@
   <message name="addRecipeResponse">
     <part name="addRecipeReturn"/>
   </message>
+  <message name="deleteRecipe">
+    <part name="recipe" element="typens:recipe"/>
+  </message>
+  <message name="deleteRecipeResponse">
+    <part name="deleteRecipeReturn"/>
+  </message>
   <portType name="essai_instancePortType">
     <operation name="getAllRecipes">
       <input message="typens:getAllRecipes"/>
@@ -18,6 +24,10 @@
     <operation name="addRecipe">
       <input message="typens:addRecipe"/>
       <output message="typens:addRecipeResponse"/>
+    </operation>
+    <operation name="deleteRecipe">
+      <input message="typens:deleteRecipe"/>
+      <output message="typens:deleteRecipeResponse"/>
     </operation>
   </portType>
   <binding name="essai_instanceBinding" type="typens:essai_instancePortType">
@@ -32,6 +42,15 @@
       </output>
     </operation>
     <operation name="addRecipe">
+      <soap:operation soapAction="urn:essai_instanceAction"/>
+      <input>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="deleteRecipe">
       <soap:operation soapAction="urn:essai_instanceAction"/>
       <input>
         <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
