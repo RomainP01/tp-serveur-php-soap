@@ -19,7 +19,7 @@ function getAllRecipes()
 }
 
 //function that add recipe to the database
-function addRecipe($nomRecette, $descriptionRecette)
+function addRecipe($elements)
 {
     $servername = "localhost";
     $username = "root";
@@ -34,7 +34,7 @@ function addRecipe($nomRecette, $descriptionRecette)
     }
 
     $sql = "INSERT INTO recipe (nomRecette, descriptionRecette)
-    VALUES ('$nomRecette', '$descriptionRecette')";
+    VALUES ('$elements[0]', '$elements[1]')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";

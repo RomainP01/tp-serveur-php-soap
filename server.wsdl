@@ -5,11 +5,10 @@
     <part name="getAllRecipesReturn"/>
   </message>
   <message name="addRecipe">
-    <part name="name" type="xsd:string"/>
-    <part name="description" type="xsd:string"/>
+    <part name="recipe" element="typens:recipe"/>
   </message>
   <message name="addRecipeResponse">
-    <part name="addRecipeReturn" type="xsd:int"/>
+    <part name="addRecipeReturn"/>
   </message>
   <portType name="essai_instancePortType">
     <operation name="getAllRecipes">
@@ -20,7 +19,6 @@
       <input message="typens:addRecipe"/>
       <output message="typens:addRecipeResponse"/>
     </operation>
-
   </portType>
   <binding name="essai_instanceBinding" type="typens:essai_instancePortType">
     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -41,10 +39,11 @@
       <output>
         <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </output>
-    </binding>
-    <service name="exempleService">
-      <port name="essai_instancePort" binding="typens:essai_instanceBinding">
-        <soap:address location="http://localhost/tp-serveur-php-soap/AccessServer.php"/>
-      </port>
-    </service>
-  </definitions>
+    </operation>
+  </binding>
+  <service name="exempleService">
+    <port name="essai_instancePort" binding="typens:essai_instanceBinding">
+      <soap:address location="http://localhost/tp-serveur-php-soap/AccessServer.php"/>
+    </port>
+  </service>
+</definitions>
